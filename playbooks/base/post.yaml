@@ -7,6 +7,7 @@
 
 - hosts: localhost
   roles:
+    - generate-zuul-manifest
     - role: avass-upload-logs-s3
       vars:
         zuul_log_bucket: vassast-zuul-logs
