@@ -1,3 +1,6 @@
 - hosts: all
   roles:
-    - fetch-output
+    - role: fetch-output
+      when: ansible_connection == 'ssh'
+    - role: fetch-output-openshift
+      when: ansible_connection == 'kubectl'
