@@ -13,3 +13,4 @@
         upload_logs_s3_endpoint: https://fra1.digitaloceanspaces.com
         zuul_log_aws_access_key: "{{ digitalocean_log_space.digitalocean_access_key }}"
         zuul_log_aws_secret_key: "{{ digitalocean_log_space.digitalocean_secret_key }}"
+        zuul_log_bucket_public: true
