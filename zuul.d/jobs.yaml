@@ -13,6 +13,7 @@
     post-run: playbooks/base/post.yaml
     roles:
       - zuul: opendev.org/zuul/zuul-jobs
+      - zuul: albinvass/zuul-jobs
     timeout: 1800
     secrets:
     - name: digitalocean_log_space
@@ -26,9 +27,12 @@
       main job in production.  Not for general use.
     pre-run: playbooks/base-test/pre.yaml
     post-run: playbooks/base-test/post.yaml
-    roles:
       - zuul: opendev.org/zuul/zuul-jobs
+      - zuul: albinvass/zuul-jobs
     timeout: 1800
+    secrets:
+    - name: digitalocean_log_space
+      secret: digitalocean_log_space
 
 - secret:
     name: digitalocean_log_space
