@@ -27,6 +27,7 @@
       main job in production.  Not for general use.
     pre-run: playbooks/base-test/pre.yaml
     post-run: playbooks/base-test/post.yaml
+    roles:
       - zuul: opendev.org/zuul/zuul-jobs
       - zuul: github.com/albinvass/zuul-jobs
     timeout: 1800
