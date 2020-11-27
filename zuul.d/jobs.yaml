@@ -14,6 +14,9 @@
     roles:
       - zuul: opendev.org/zuul/zuul-jobs
     timeout: 1800
+    secrets:
+    - name: digitalocean_log_space
+      secret: digitalocean_log_space
 
 - job:
     name: base-test
@@ -26,3 +29,19 @@
     roles:
       - zuul: opendev.org/zuul/zuul-jobs
     timeout: 1800
+
+- secret:
+    name: digitalocean_log_space
+    data:
+      digitalocean_access_key: KNQ3H5AHB2HTIJMDC3AT
+      digitalocean_secret_key: !encrypted/pkcs1-oaep
+        - gj10412aXbdA6cjQG2cKdcIPv5l8xtFmMOU9azujA+yE/5ekyo/aejveeIg/zhpwtHeMW
+          LmaFeR71evlNxDsLS2lJmVnTVN/nVUMBVTdi4VYlGki6n//2590KuBY92QobVXISnVjsK
+          K8RxDpWapdyC3+vcQhVtkEj+XZ9AVucMRANejC/WHsY07+Q4KTE9uzxfM5c+/v6H4lQ8p
+          /mhsUWCPmg5l2xEcHCQT3HicJ692jHEOs1hzG/oEeyruYhhgJdJbJXJ+kcFzMkriN1WhT
+          7ClqphUpT0Av6KWW/bWDHKebomHMwjrieV/QcDEIpEh9Fkbuqa02/hCOH+TtaPFXaYqlS
+          c455ypeUELPm1xMA6E9hvRnBonBUU0sIYhHgN3LEUw3pn+PChjIIjMLzWzOkFCOn50TLS
+          /p+R343liZQc8Q4m2BlAKmCjH8MQRaCA1GmYS9JzynR7uqkegq72ZtCLTcgz3mffjgMfN
+          eInTzNdbYtDz6QuUlqEHe3uGwvXSOywIvLyklsJaunCwIKPlMLX74XaUMSuevV4FRmJLh
+          LsvF70fdt+j9z3Eh6kxX630feC5KUL1GURs2zr2mL/Wset4xtmry6+iYFM7mI0JYGYtXK
+          YApIro0ig7lRkyox6Rf2Obh8+MVUSBTt/oC4N/K/OvCIB55QB9V1jxcbv/lVuo=
