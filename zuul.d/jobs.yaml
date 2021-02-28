@@ -18,6 +18,8 @@
     secrets:
     - name: digitalocean_log_space
       secret: digitalocean_log_space
+    - name: config-project-secret
+      secret: config_project_secret
 
 - job:
     name: base-test
@@ -50,3 +52,9 @@
           eInTzNdbYtDz6QuUlqEHe3uGwvXSOywIvLyklsJaunCwIKPlMLX74XaUMSuevV4FRmJLh
           LsvF70fdt+j9z3Eh6kxX630feC5KUL1GURs2zr2mL/Wset4xtmry6+iYFM7mI0JYGYtXK
           YApIro0ig7lRkyox6Rf2Obh8+MVUSBTt/oC4N/K/OvCIB55QB9V1jxcbv/lVuo=
+
+- secret:
+    name: config-project-secret
+    data:
+      secret_data: 123abc
+      secret_file: ~/zuul-output/logs/my-file
