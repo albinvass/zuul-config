@@ -18,8 +18,8 @@
     secrets:
     - name: digitalocean_log_space
       secret: digitalocean_log_space
-    - name: config-project-secret
-      secret: config_project_secret
+    - name: config_project_secret
+      secret: config-project-secret
 
 - job:
     name: base-test
