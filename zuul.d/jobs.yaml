@@ -17,6 +17,8 @@
       - zuul: opendev.org/zuul/zuul-jobs
       - zuul: github.com/albinvass/zuul-jobs
     timeout: 1800
+    vars:
+      zuul_cache_backend: s3
     secrets:
     - name: digitalocean_log_space
       secret: digitalocean_log_space
@@ -42,7 +44,6 @@
 - secret:
     name: zuul_cache
     data:
-      backend: s3
       url: https://fra1.digitaloceanspaces.com
       bucket: vassast-zuul-logs
       access_key: WRHUPNNPBEDKYNLS24HG
