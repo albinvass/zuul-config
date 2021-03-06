@@ -16,3 +16,6 @@
     # This roles copies the ansible inventory to zuul-info/
     # for debugging purposes
     - log-inventory
+    - role: zuul-cache
+      vars:
+        zuul_cache_mode: prepare

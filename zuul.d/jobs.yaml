@@ -10,7 +10,9 @@
 
       It also sets a default timeout value (which may be overidden).
     pre-run: playbooks/base/pre.yaml
-    post-run: playbooks/base/post.yaml
+    post-run:
+      - playbooks/base/post-update-artifacts.yaml
+      - playbooks/base/post.yaml
     roles:
       - zuul: opendev.org/zuul/zuul-jobs
       - zuul: github.com/albinvass/zuul-jobs
@@ -18,8 +20,8 @@
     secrets:
     - name: digitalocean_log_space
       secret: digitalocean_log_space
-    - name: config_project_secret
-      secret: config-project-secret
+    - name: zuul_cache
+      secret: zuul_cache
 
 - job:
     name: base-test
@@ -38,6 +40,24 @@
       secret: digitalocean_log_space
 
 - secret:
+    name: zuul_cache
+    data:
+      backend: s3
+      url: https://fra1.digitaloceanspaces.com
+      bucket: vassast-zuul-logs
+      access_key: WRHUPNNPBEDKYNLS24HG
+      secret_key: !encrypted/pkcs1-oaep
+        - m1dFMTlQNYdtd+MBGBiVPg881+ze4FJTyp1jmNieMklhTV/VrUrzaUu07yDWWhQcbODtv
+          uPzqkkdejTVNKBnNyuJ3qhxsYJu1kH1gERMQqnpkF4/PXxpsPJnQ7oP+CXE+so51Onldz
+          P2gzdypq4Dntu0TMGbQDgTl/5cZR1ElCnzxtiDjIfyO8mYNNISNXnlrMgrvvgeWRZJ2rx
+          MXon7zGU4+GTTLS6ZPGWU2SWjUhvnhwU+7QLSZb8aouq5Poj4icffbtOmCqqauaRrHNox
+          1ZJkQ4XkNzu3kmYa8/PjS+RE3otEWj6Eny+JiMLBGPa+FJhnEzDAJh2zYTA5uzRCg8Zij
+          JQNfKpKhPghJI7FLugifEmiUZsKoijAG6uX53LyRhpanuHszngK1njZX8b/+gJYp2Bb3q
+          bJwOjVSce76d0afdbM8WuM2Obhq5/vH3fTdecWvxgQJlEJoiZ9coOAVuoNzcdpLnf3Fmo
+          bIlpi8kaGWfzc1Bl1/aAFXuS3MVyx5igQ+FlKRH+ky2r7CQ3/uf/MsOhqnfzDrRQ9GuJt
+          8/ANExklZZUQS7hddw6Pcogg/7DeslYEf5Kdm0jIQq6fiXT8XvA6sGaK3tptAMPmK2ppw
+          NPSd8CFNEDoIMIksI8bPJJi7VdAYFq6qsB/zhGf2rSRBdObZ64EsIEtavMsDrc=
+- secret:
     name: digitalocean_log_space
     data:
       digitalocean_access_key: WRHUPNNPBEDKYNLS24HG
@@ -52,9 +72,3 @@
           bIlpi8kaGWfzc1Bl1/aAFXuS3MVyx5igQ+FlKRH+ky2r7CQ3/uf/MsOhqnfzDrRQ9GuJt
           8/ANExklZZUQS7hddw6Pcogg/7DeslYEf5Kdm0jIQq6fiXT8XvA6sGaK3tptAMPmK2ppw
           NPSd8CFNEDoIMIksI8bPJJi7VdAYFq6qsB/zhGf2rSRBdObZ64EsIEtavMsDrc=
-
-- secret:
-    name: config-project-secret
-    data:
-      secret_data: 123abc
-      secret_file: ~/zuul-output/logs/my-file
