@@ -40,7 +40,7 @@
 - secret:
     name: digitalocean_log_space
     data:
-      digitalocean_access_key: WRHUPNNPBEDKYNLS24H
+      digitalocean_access_key: WRHUPNNPBEDKYNLS24HG
       digitalocean_secret_key: !encrypted/pkcs1-oaep
         - m1dFMTlQNYdtd+MBGBiVPg881+ze4FJTyp1jmNieMklhTV/VrUrzaUu07yDWWhQcbODtv
           uPzqkkdejTVNKBnNyuJ3qhxsYJu1kH1gERMQqnpkF4/PXxpsPJnQ7oP+CXE+so51Onldz
