@@ -31,6 +31,7 @@
 
 - pipeline:
     name: gate
+    post-review: true
     description: |
       Changes that have been approved by core developers are enqueued
       in order in this pipeline, and if they pass tests, will be
@@ -102,10 +103,10 @@
 
 - pipeline:
     name: tag
+    post-review: true
     description: This pipeline runs jobs in response to any tag event.
     manager: independent
     precedence: high
-    post-review: True
     trigger:
       github:
         - event: push
@@ -117,6 +118,7 @@
 
 - pipeline:
     name: nightly
+    post-review: true
     description: This pipeline runs nightly at 00:00 UTC.
     manager: independent
     trigger:
