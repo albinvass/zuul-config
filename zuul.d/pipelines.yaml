@@ -114,3 +114,25 @@
       mysql:
     failure:
       mysql:
+
+- pipeline:
+    name: nightly
+    description: This pipeline runs nightly at 00:00 UTC.
+    manager: independent
+    post-review: True
+    trigger:
+      github:
+        - event: push
+          ref: ^refs/tags/.*$
+    success:
+      mysql:
+    failure:
+      mysql:
+
+- pipeline:
+    name: nightly
+    description: This pipeline runs nightly at 00:00 UTC.
+    manager: independent
+    trigger:
+      timer:
+        time: 0 0 * * *
