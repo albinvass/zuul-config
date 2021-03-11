@@ -19,12 +19,10 @@
         check: 'in_progress'
         comment: false
     success:
-      mysql:
       github:
         check: 'success'
         comment: false
     failure:
-      mysql:
       github:
         check: 'failure'
         comment: false
@@ -73,13 +71,11 @@
         check: 'in_progress'
         comment: false
     success:
-      mysql:
       github:
         check: 'success'
         comment: false
         merge: true
     failure:
-      mysql:
       github:
         check: 'failure'
         comment: false
@@ -96,10 +92,6 @@
       github:
         - event: push
           ref: ^refs/heads/.*$
-    success:
-      mysql:
-    failure:
-      mysql:
 
 - pipeline:
     name: tag
@@ -111,10 +103,6 @@
       github:
         - event: push
           ref: ^refs/tags/.*$
-    success:
-      mysql:
-    failure:
-      mysql:
 
 - pipeline:
     name: nightly
