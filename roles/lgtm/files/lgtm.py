@@ -84,7 +84,6 @@ def main():
         if comment.created_at > last_commit_date:
             for line in comment.body.split("\n"):
                 if line.strip() in APPROVAL_ALIASES:
-                    sign_offs.add(comment.user.login)
                     approvals.add(comment.user.login)
 
     if any([(r in approvals) for r in reviewers]):
