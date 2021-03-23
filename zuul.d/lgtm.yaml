@@ -1,0 +1,81 @@
+- job:
+    name: lgtm
+    parent: null
+    final: true
+    run: playbooks/lgtm/run.yaml
+    timeout: 120
+    secrets:
+      - name: github_application_credentials
+        secret: github_application_credentials
+    nodeset:
+      nodes:
+        - name: fedora
+          label: fedora-pod
+
+- secret:
+    name: github_application_credentials
+    data:
+      application_id: "89996"
+      private_key: !encrypted/pkcs1-oaep
+        - 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
+
+- pipeline:
+    name: lgtm
+    manager: independent
+    precedence: low
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+        - event: pull_request_review
+    start:
+      github:
+        check: 'in_progress'
+        comment: false
+    success:
+      github:
+        check: 'success'
+        comment: false
+    failure:
+      github:
+        check: 'failure'
+        comment: false
