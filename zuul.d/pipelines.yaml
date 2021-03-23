@@ -42,8 +42,6 @@
         review:
           # Require an approval from user with write access (e.g. core-reviewer)
           - type: approved
-            permission: write
-          - type: approved
             permission: read
             username: "vassast-zuul"
         # Require label
