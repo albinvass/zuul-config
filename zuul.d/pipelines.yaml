@@ -40,8 +40,7 @@
     require:
       github:
         review:
-          - permission: write
-            type: approved
+          - type: approved
         label: gate
         open: True
         current-patchset: True
