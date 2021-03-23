@@ -40,7 +40,10 @@
     require:
       github:
         review:
+          # Require an approval from user with write access (e.g. core-reviewer)
           - type: approved
+            permission: write
+        # Require label
         label: gate
         open: True
         current-patchset: True
