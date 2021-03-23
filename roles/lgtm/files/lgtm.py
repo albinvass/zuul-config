@@ -78,50 +78,20 @@ def main():
     last_commit_date = max(commit_dates) if commit_dates else None
 
     # Parse comments
-    review_comment = None
-    sign_offs = set()
     approvals = set()
     for comment in pull_request.issue_comments():
-        # Find the application comment
-        review_prefix = comment.body.startswith(REVIEW_COMMENT_PREFIX)
-        is_bot_comment = comment.user.login == f"{app_slug}[bot]"
-        if is_bot_comment and review_prefix:
-            review_comment = comment
-
         # Find the signoffs
         if comment.created_at > last_commit_date:
             for line in comment.body.split("\n"):
-                if line.strip() in LGTM_ALIASES:
-                    sign_offs.add(comment.user.login)
                 if line.strip() in APPROVAL_ALIASES:
                     sign_offs.add(comment.user.login)
                     approvals.add(comment.user.login)
 
-    # Update comment
-    message = dedent(f"""\
-    {REVIEW_COMMENT_PREFIX}
-
-    Reviewer | Sign-off
-    -------- | --------
-    """)
-
-    for reviewer in reviewers:
-        signed_off = ":v: Not reviewed"
-        if reviewer in sign_offs:
-            signed_off = ":ok_hand: Looks good to me"
-
-        approval = ""
-        if reviewer in approvals:
-            approval = "<br>:rocket: Approved"
-
-        message += f"@{reviewer} | {signed_off} {approval}"
-
-    if review_comment is not None:
-        review_comment.edit(message)
-    else:
-        review_comment = pull_request.create_comment(message)
-
     if any([(r in approvals) for r in reviewers]):
+        pull_request.create_review(
+            "Nothing to see here. :eyes:",
+            list(pull_request.commits())[-1].sha,
+            'APPROVE')
         return 0
 
     return 1
