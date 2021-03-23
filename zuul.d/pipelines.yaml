@@ -45,7 +45,7 @@
             permission: write
           - type: approved
             permission: read
-            username: vassast-zuul[bot]
+            username: vassast-zuul\[bot\]
         # Require label
         label: gate
         open: True
