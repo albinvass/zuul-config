@@ -1,0 +1,15 @@
+---
+- name: Install dependencies
+  pip:
+    name:
+    - codeowners
+    - github3.py
+
+- name: Run LGTM
+  script: lgtm.py
+  environment:
+    GITHUB_APP_ID: "{{ github_application_credentials.application_id }}"
+    GITHUB_PRIVATE_KEY: "{{ github_application_credentials.private_key }}"
+    PROJECT: "{{ zuul.project.name }}"
+    PULL_REQUEST_ID: "{{ zuul.change }}"
+...
