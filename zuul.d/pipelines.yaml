@@ -42,8 +42,7 @@
         review:
           # Require an approval from user with write access (e.g. core-reviewer)
           - type: approved
-            permission: read
-            username: "vassast-zuul"
+            permission: write
         # Require label
         label: gate
         open: True
