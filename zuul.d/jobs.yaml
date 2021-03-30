@@ -14,7 +14,8 @@
       - playbooks/base/post-update-artifacts.yaml
       - playbooks/base/post.yaml
     roles:
-      - zuul: opendev.org/zuul/zuul-jobs
+      #- zuul: opendev.org/zuul/zuul-jobs
+      - zuul: zuul/zuul-jobs
       - zuul: github.com/albinvass/zuul-jobs
     timeout: 1800
     vars:
