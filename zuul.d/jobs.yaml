@@ -14,8 +14,7 @@
       - playbooks/base/post-update-artifacts.yaml
       - playbooks/base/post.yaml
     roles:
-      #- zuul: opendev.org/zuul/zuul-jobs
-      - zuul: zuul/zuul-jobs
+      - zuul: opendev.org/zuul/zuul-jobs
       - zuul: github.com/albinvass/zuul-jobs
     required-projects:
       - zuul/zuul-jobs
