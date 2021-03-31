@@ -1,0 +1,21 @@
+- hosts: all
+  roles:
+    - start-zuul-console
+    - role: add-build-sshkey
+      when: ansible_connection == 'ssh'
+    - role: prepare-workspace
+      when: ansible_connection == 'ssh'
+    - role: prepare-workspace-openshift
+      when: ansible_connection == 'kubectl'
+    # This role ensures basic connectivity and produces some
+    # helpful information in zuul-info/
+    - validate-host
+    # This role ensures standard output directories are created
+    # on each remote node
+    - ensure-output-dirs
+    # This roles copies the ansible inventory to zuul-info/
+    # for debugging purposes
+    - log-inventory
+    - role: zuul-cache
+      vars:
+        zuul_cache_mode: prepare
