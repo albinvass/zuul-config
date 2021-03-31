@@ -17,7 +17,7 @@
       - zuul: opendev.org/zuul/zuul-jobs
       - zuul: github.com/albinvass/zuul-jobs
     required-projects:
-      - zuul/zuul-jobs
+      - opendev.org/zuul/zuul-jobs
     timeout: 1800
     vars:
       zuul_cache_backend: s3
