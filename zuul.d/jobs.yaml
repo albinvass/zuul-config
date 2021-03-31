@@ -32,14 +32,20 @@
       A job to test changes to the base job without disturbing the
       main job in production.  Not for general use.
     pre-run: playbooks/base-test/pre.yaml
-    post-run: playbooks/base-test/post.yaml
+    post-run:
+      - playbooks/base/post-update-artifacts.yaml
+      - playbooks/base/post.yaml
     roles:
       - zuul: opendev.org/zuul/zuul-jobs
       - zuul: github.com/albinvass/zuul-jobs
     timeout: 1800
+    vars:
+      zuul_cache_backend: s3
     secrets:
     - name: digitalocean_log_space
       secret: digitalocean_log_space
+    - name: zuul_cache
+      secret: zuul_cache
 
 - secret:
     name: zuul_cache
