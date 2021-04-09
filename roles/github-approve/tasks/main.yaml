@@ -5,8 +5,8 @@
     - codeowners
     - github3.py
 
-- name: Run LGTM
-  script: lgtm.py
+- name: Run github-approve.py
+  script: github-approve.py
   environment:
     GITHUB_APP_ID: "{{ github_application_credentials.application_id }}"
     GITHUB_PRIVATE_KEY: "{{ github_application_credentials.private_key }}"

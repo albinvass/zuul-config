@@ -1,8 +1,8 @@
 - job:
-    name: lgtm
+    name: github-approve
     parent: null
     final: true
-    run: playbooks/lgtm/run.yaml
+    run: playbooks/github-approve/run.yaml
     timeout: 120
     secrets:
       - name: github_application_credentials
@@ -55,7 +55,7 @@
           IF3sKKDizlANaT94rqbemL3WcBx6Lg8OZjlTzs0bdiDyvT0Io4L9epE2yi5Xlw=
 
 - pipeline:
-    name: lgtm
+    name: approve
     manager: independent
     precedence: low
     trigger:
