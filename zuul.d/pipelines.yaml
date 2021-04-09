@@ -41,15 +41,11 @@
       github:
         review:
           - type: approved
+            permission: read
+            username: "^vassast-zuul\\[bot\\]"
         label: gate
         open: True
         current-patchset: True
-    reject:
-      github:
-        review:
-          - type: approved
-            permission: read
-            username: "^(?!vassast-zuul\\[bot\\])"
     trigger:
       github:
         - event: pull_request_review
