@@ -54,6 +54,12 @@
           JkVBkOzG5X7V2ztxdCJZkU9u8Xa/dM7XrT0H37qaVWAIZCo3wVbnIYDaenqKu092s6kKb
           IF3sKKDizlANaT94rqbemL3WcBx6Lg8OZjlTzs0bdiDyvT0Io4L9epE2yi5Xlw=
 
+- project-template:
+    name: github-self-approve
+    approve:
+      jobs:
+        - github-approve
+
 - pipeline:
     name: approve
     manager: independent
