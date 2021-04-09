@@ -7,10 +7,6 @@
     secrets:
       - name: github_application_credentials
         secret: github_application_credentials
-    nodeset:
-      nodes:
-        - name: fedora
-          label: fedora-pod
 
 - secret:
     name: github_application_credentials
