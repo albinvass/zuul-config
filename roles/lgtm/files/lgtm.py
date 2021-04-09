@@ -88,7 +88,7 @@ def main():
 
     if any([(r in approvals) for r in reviewers]):
         pull_request.create_review(
-            "Nothing to see here. :eyes:",
+            "Pull Request Approved.",
             list(pull_request.commits())[-1].sha,
             'APPROVE')
         return 0
