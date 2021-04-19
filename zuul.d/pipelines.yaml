@@ -104,7 +104,8 @@
     manager: supercedent
     precedence: high
     require:
-      merged: true
+      github:
+        merged: true
     trigger:
       github:
         - event: closed
@@ -118,7 +119,8 @@
     manager: serial
     precedence: high
     require:
-      merged: true
+      github:
+        merged: true
     trigger:
       github:
         - event: closed
