@@ -108,7 +108,8 @@
         merged: true
     trigger:
       github:
-        - event: closed
+        - event: pull_request
+          action: closed
 
 - pipeline:
     name: deploy
@@ -123,7 +124,8 @@
         merged: true
     trigger:
       github:
-        - event: closed
+        - event: pull_request
+          action: closed
 
 - pipeline:
     name: tag
