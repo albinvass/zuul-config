@@ -146,3 +146,12 @@
     trigger:
       timer:
         time: 0 0 * * *
+
+- pipeline:
+    name: weekly
+    post-review: true
+    description: This pipeline runs weekly sundays at 00:00 UTC.
+    manager: independent
+    trigger:
+      timer:
+        time: 0 0 * * 0
