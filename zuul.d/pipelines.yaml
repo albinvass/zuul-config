@@ -84,7 +84,7 @@
         - event: pull_request_review
           action: dismissed
           state:
-            - request_changes
+            - changes_requested
         - event: pull_request
           action: status
           status: ".*:success"
