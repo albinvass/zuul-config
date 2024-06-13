@@ -6,30 +6,55 @@
     manager: independent
     trigger:
       github:
+        # Run this pipeline on new/changed pull requests
         - event: pull_request
           action:
             - opened
             - changed
             - reopened
+        # Run in response to a pull request comment "recheck"
         - event: pull_request
           action: comment
           comment: (?i)^\s*recheck\s*$
+        # When using the checks API to report results, failed runs
+        # will have a "re-run" button which emits this event.
+        - event: check_run
+          action: rerequested
+          check: .*/check:.*
     start:
       github:
         check: 'in_progress'
         comment: false
+        # It is recommended to use the checks API for consistency with
+        # other common CI tools that integrate with Github.  Results
+        # will appear on the "checks" tab of PR and changes.  There is
+        # generally no need to have Zuul leave comments when using the
+        # checks API.
+        #
+        # The older status API appears inline with the PR and can be
+        # enabled by uncommenting the "status:" in the various
+        # sections below.  You should choose one or the other
+        # depending on project preferences.
+        #
+        #status: 'pending'
+        #comment: false
     success:
       github:
         check: 'success'
         comment: false
+        #status: 'success'
     failure:
       github:
         check: 'failure'
         comment: false
+        #status: 'failure'
+    dequeue:
+      github:
+        check: cancelled
+        comment: false
 
 - pipeline:
     name: gate
-    post-review: true
     description: |
       Changes that have been approved by core developers are enqueued
       in order in this pipeline, and if they pass tests, will be
@@ -40,9 +65,10 @@
     require:
       github:
         review:
-          - type: approved
-            permission: read
-            username: "^vassast-zuul\\[bot\\]"
+          # Require an approval from user with write access (e.g. core-reviewer)
+          - permission: write
+            type: approved
+        # Require label
         label: gate
         open: True
         current-patchset: True
@@ -60,6 +86,9 @@
         - event: pull_request
           action: status
           status: ".*:success"
+        - event: check_run
+          action: rerequested
+          check: .*/gate:.*
         - event: pull_request
           action: labeled
           label:
@@ -68,14 +97,21 @@
       github:
         check: 'in_progress'
         comment: false
+        #status: 'pending'
     success:
       github:
         check: 'success'
         comment: false
+        #status: 'success'
         merge: true
     failure:
       github:
         check: 'failure'
+        #status: 'failure'
+        comment: false
+    dequeue:
+      github:
+        check: cancelled
         comment: false
     window-floor: 20
     window-increase-factor: 2
@@ -92,63 +128,12 @@
           ref: ^refs/heads/.*$
 
 - pipeline:
-    name: promote
-    post-review: true
-    description: |
-      This pipeline runs jobs that operate after each change is merged
-      in order to promote artifacts generated in the gate
-      pipeline.
-    manager: supercedent
-    precedence: high
-    require:
-      github:
-        merged: true
-    trigger:
-      github:
-        - event: pull_request
-          action: closed
-
-- pipeline:
-    name: deploy
-    post-review: true
-    description: |
-      This pipeline runs jobs that operate after each change is merged
-      in order to run production deployment playbooks.
-    manager: serial
-    precedence: high
-    require:
-      github:
-        merged: true
-    trigger:
-      github:
-        - event: pull_request
-          action: closed
-
-- pipeline:
     name: tag
-    post-review: true
     description: This pipeline runs jobs in response to any tag event.
     manager: independent
     precedence: high
+    post-review: True
     trigger:
       github:
         - event: push
           ref: ^refs/tags/.*$
-
-- pipeline:
-    name: nightly
-    post-review: true
-    description: This pipeline runs nightly at 00:00 UTC.
-    manager: independent
-    trigger:
-      timer:
-        time: 0 0 * * *
-
-- pipeline:
-    name: weekly
-    post-review: true
-    description: This pipeline runs weekly sundays at 00:00 UTC.
-    manager: independent
-    trigger:
-      timer:
-        time: 0 0 * * 0
