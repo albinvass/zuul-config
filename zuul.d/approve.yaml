@@ -69,8 +69,6 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*/approve\s*$
-        - event: pull_request_review
-          comment: (?i)^\s*/approve\s*$
     start:
       github:
         check: 'in_progress'
