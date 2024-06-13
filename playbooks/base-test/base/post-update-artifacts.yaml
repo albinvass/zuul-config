@@ -1,5 +1,0 @@
-- hosts: all
-  roles:
-    - role: zuul-cache
-      vars:
-        zuul_cache_mode: update
